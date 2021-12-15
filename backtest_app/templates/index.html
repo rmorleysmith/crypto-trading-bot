@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Binance Trading Bot</title>
+    </head>
+
+    <body>
+        <h1>{{ title }}</h1>
+        <div id="chart"></div>
+        <div id="symbol-select">
+            <table>
+                <tr>
+                    <td class="select">Symbol: </td>
+                    <td>
+                        <select id="symbol" name="symbol_select">
+                            {% for symbol in symbol_selection %}
+                            <option value="{{symbol}}">{{symbol}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="balances">
+            <h2>Balances</h2>
+            <table>
+                {% for key, val in asset_balances.items() %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ val }} </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div id="backtesting">
+            <h2>Backtesting</h2>
+            <h3>Settings</h3>
+            <form>
+                <table>
+                    <tr>
+                        <td class="select">Symbol: </td>
+                        <td>
+                            <select id="symbol" name="symbol_select">
+                                {% for symbol in symbol_selection %}
+                                <option value="{{symbol}}">{{symbol}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="select">Strategy: </td>
+                        <td>
+                            <select id="strategy" name="strategy_select">
+                                {% for strategy in strategy_selection %}
+                                <option value="{{strategy}}">{{strategy}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <br> 
+                <input type="submit" formaction="/run_backtest" name="backtest_button" value="Run backtest"/>
+            </form>
+        </div>
+
+        <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+        <script src="{{ url_for('static', filename='chart.js') }}"></script>
+
+    </body>
+
+</html>
